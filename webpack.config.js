@@ -2,6 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const sveltePreprocess = require('svelte-preprocess')
 const {sass} = require('svelte-preprocess-sass')
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     entry: {
@@ -14,6 +15,13 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             title: "Order Summary"
+        }),
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: 'public/images', to: 'images'
+                }
+            ]
         })
     ],
     resolve: {
@@ -52,12 +60,16 @@ module.exports = {
                     'css-loader',
                     'sass-loader'
                 ]
+            },
+            {
+                test: /\.(png|svg)$/i,
+                type: 'asset/resource'
             }
         ]
     },
     devServer: {
         static: {
-            directory: path.join(__dirname, 'public'),
+            directory: path.join(__dirname, 'public', 'images'),
         },
         compress: true,
         port: 9000,
