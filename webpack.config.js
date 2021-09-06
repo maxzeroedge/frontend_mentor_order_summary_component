@@ -8,7 +8,7 @@ module.exports = {
         app: './src/index.js'
     },
     output: {
-        path: path.resolve(path.dirname(__filename), 'docs'),
+        path: path.resolve(path.dirname(__filename), 'dist'),
         filename: '[name].js'
     },
     plugins: [
